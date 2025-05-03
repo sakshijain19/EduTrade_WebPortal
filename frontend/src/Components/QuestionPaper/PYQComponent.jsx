@@ -337,20 +337,11 @@ const questionPapers = {
   }))
 };
 
-const handleDownload = (subject) => {
-  const fileName = `${subject.name}.pdf`; // Use subject name as filename
-  const blob = new Blob(['Sample file content'], { type: 'application/pdf' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = fileName;
-  a.click();
-  URL.revokeObjectURL(url);
-};
-
 export default function PYQComponent() {
-  const [selectedBranch, setSelectedBranch] = useState(null);
-  const [selectedSemester, setSelectedSemester] = useState(null);
+  const [selectedBranch, setSelectedBranch] = useState("Computer Engineering");
+  const [selectedSemester, setSelectedSemester] = useState(
+    questionPapers["Computer Engineering"][0]
+  );
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredSubjects = selectedSemester
@@ -358,6 +349,16 @@ export default function PYQComponent() {
         sub.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
     : [];
+
+  const handleDownload = (subject) => {
+    const formattedSubject = subject.name.replace(/\s+/g, '%20');
+    const branch = selectedBranch.replace(/\s+/g, '');
+    const semester = `sem-${selectedSemester.id}`;
+    const filename = `${subject.name}.pdf`;
+
+    const downloadUrl = `http://localhost:5001/api/questionpapers/download/${branch}/${semester}/${formattedSubject}/${filename}`;
+    window.open(downloadUrl, '_blank');
+  };
 
   return (
     <div className="w-full max-w-4xl mx-auto mt-8 mb-8 px-4 sm:px-6 lg:px-8">
@@ -367,13 +368,14 @@ export default function PYQComponent() {
             Previous Year Question Papers (PYQ)
           </h1>
 
+          {/* Branch Selector */}
           <div className="mb-4">
             <select
               className="w-full p-2 border rounded-md"
               onChange={(e) => {
                 setSelectedBranch(e.target.value);
                 setSelectedSemester(null);
-                setSearchTerm(""); // Reset search term when branch changes
+                setSearchTerm("");
               }}
               value={selectedBranch || ""}
             >
@@ -386,6 +388,7 @@ export default function PYQComponent() {
             </select>
           </div>
 
+          {/* Semester Selector */}
           <div className="mb-4">
             <select
               className="w-full p-2 border rounded-md"
@@ -409,6 +412,7 @@ export default function PYQComponent() {
             </select>
           </div>
 
+          {/* Subject Search + List */}
           {selectedSemester && (
             <div>
               <div className="mb-4 flex items-center">
@@ -421,9 +425,11 @@ export default function PYQComponent() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
+
               <p className="mb-2 text-gray-600">
                 {filteredSubjects.length} subjects found
               </p>
+
               <ul className="space-y-2">
                 {filteredSubjects.map((sub) => (
                   <li
@@ -431,11 +437,13 @@ export default function PYQComponent() {
                     className="flex justify-between items-center p-2 hover:bg-gray-100 transition duration-200"
                   >
                     <span>{sub.name}</span>
+
                     <button
                       onClick={() => handleDownload(sub)}
-                      className="text-blue-500 hover:underline"
+                      className="text-blue-600 hover:underline hover:text-blue-800 focus:outline-none"
+                      title="Download PDF"
                     >
-                      <FiDownload />
+                      <FiDownload className="w-5 h-5 cursor-pointer" />
                     </button>
                   </li>
                 ))}
@@ -443,7 +451,7 @@ export default function PYQComponent() {
             </div>
           )}
 
-          {/* Clear Selection Button */}
+          {/* Clear Button */}
           <div className="mt-4">
             <button
               onClick={() => {
