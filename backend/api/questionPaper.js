@@ -8,6 +8,9 @@ import {
 import auth from '../middleware/auth.js';
 import multer from 'multer';
 
+// Create router instance
+const router = express.Router();
+
 // Configure multer for PDF uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

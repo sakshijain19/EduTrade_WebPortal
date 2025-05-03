@@ -90,7 +90,7 @@ if (!fs.existsSync(booksDir)) {
 app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/notes', notesRoutes);
-app.use('/api/question-papers', questionPapersRoutes);
+app.use('/api/questionpapers', questionPapersRoutes);
 app.use('/api/feedback', feedbackRoutes);
 
 // Error handling middleware
