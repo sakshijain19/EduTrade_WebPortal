@@ -1,6 +1,6 @@
 
 import './App.css'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from "./Layout";
 import Home from "./Components/Home/Home";
 import About from "./Components/About/About";
@@ -30,7 +30,6 @@ function App() {
     </AuthProvider>
   );
 }
-
 
 
 export default App
