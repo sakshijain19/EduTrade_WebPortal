@@ -1,5 +1,4 @@
-
-import './App.css'
+import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from "./Layout";
 import Home from "./Components/Home/Home";
@@ -10,6 +9,7 @@ import BooksPage from "./Components/Book/BookPage";
 import QuestionPapers from "./Components/QuestionPapers/QuestionPapers";
 import { AuthProvider } from "./Components/context/AuthContext";
 import { Toaster } from "react-hot-toast";
+import ProfilePage from './Components/Profile/ProfilePage';
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
             <Route path="books" element={<BooksPage />} />
             <Route path="notes" element={<Notes />} />
             <Route path="question-papers" element={<QuestionPapers />} />
+            <Route path="profile" element={<ProfilePage />} /> {/* ✅ Fixed */}
           </Route>
         </Routes>
       </Router>
@@ -31,9 +32,4 @@ function App() {
   );
 }
 
-
-export default App
-
-
-
-
+export default App;
