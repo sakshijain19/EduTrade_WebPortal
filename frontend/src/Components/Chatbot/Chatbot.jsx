@@ -5,13 +5,13 @@ const Chatbot = () => {
   useEffect(() => {
     // Inject Botpress Webchat Script
     const script1 = document.createElement("script");
-    script1.src = "https://cdn.botpress.cloud/webchat/v2.4/inject.js";
+    script1.src = "https://cdn.botpress.cloud/webchat/v3.0/.js";
     script1.async = true;
     document.body.appendChild(script1);
 
     // Inject Botpress Custom Script
     const script2 = document.createElement("script");
-    script2.src = "https://files.bpcontent.cloud/2025/02/07/13/20250207132958-JRISXZCB.js";
+    script2.src = "https://files.bpcontent.cloud/2025/02/07/13/20250207132958-TIDN3CQY.json";
     script2.async = true;
     document.body.appendChild(script2);
 
@@ -19,7 +19,7 @@ const Chatbot = () => {
     script1.onload = () => {
       window.botpressWebChat.init({
         botId: "943c07e9-1d72-48c6-b9ab-01a3345a75a9",
-        host: "https://cdn.botpress.cloud/webchat/v2.4/inject.js",
+        host: "https://cdn.botpress.cloud/webchat/v3.0/.js",
         messagingUrl: "https://messaging.botpress.cloud",
         clientId: "943c07e9-1d72-48c6-b9ab-01a3345a75a9",
         lazySocket: true,
@@ -35,4 +35,3 @@ const Chatbot = () => {
 };
 
 export default Chatbot;
-
