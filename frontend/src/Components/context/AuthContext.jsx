@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   
   // Set up the API base URL
-  const API_URL = 'http://localhost:5001/api';
+  const API_URL = 'https://edutrade-webportal.onrender.com/api';
 
   // Initialize auth state on component mount
   useEffect(() => {

@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Axios instance for feedback endpoints
 const API = axios.create({
-  baseURL: `${import.meta.env.VITE_BACKEND_URL}/feedback`, // http://localhost:5001/api/feedback
+  baseURL: `${import.meta.env.VITE_BACKEND_URL}/feedback`, // https://edutrade-webportal.onrender.com/api/feedback
   withCredentials: true,
 });
 

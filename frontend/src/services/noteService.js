@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: `${import.meta.env.VITE_BACKEND_URL}notes`, // → http://localhost:5001/api/notes
+    baseURL: `${import.meta.env.VITE_BACKEND_URL}notes`, // → https://edutrade-webportal.onrender.com/api/notes
     withCredentials: true,
 });
 

@@ -321,7 +321,7 @@ const BooksPage = () => {
                     >
                       <div className="relative">
                         <img
-                          src={`http://localhost:5001${book.image}`}
+                          src={`https://edutrade-webportal.onrender.com${book.image}`}
                           alt={book.title}
                           className="w-full h-48 object-cover"
                         />
@@ -584,7 +584,7 @@ const BooksPage = () => {
             </CardHeader>
             <CardContent>
               <img
-                src={`http://localhost:5001${selectedBook.image}`}
+                src={`https://edutrade-webportal.onrender.com${selectedBook.image}`}
                 alt={selectedBook.title}
                 className="w-full h-64 object-cover mb-4"
               />

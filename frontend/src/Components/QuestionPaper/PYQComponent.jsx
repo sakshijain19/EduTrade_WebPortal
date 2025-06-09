@@ -356,7 +356,7 @@ export default function PYQComponent() {
     const semester = `sem-${selectedSemester.id}`;
     const filename = `${subject.name}.pdf`;
 
-    const downloadUrl = `http://localhost:5001/api/questionpapers/download/${branch}/${semester}/${formattedSubject}/${filename}`;
+    const downloadUrl = `https://edutrade-webportal.onrender.com/api/questionpapers/download/${branch}/${semester}/${formattedSubject}/${filename}`;
     window.open(downloadUrl, '_blank');
   };
 

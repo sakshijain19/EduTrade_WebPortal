@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an axios instance with the backend base URL and credentials
 const API = axios.create({
-  baseURL: `${import.meta.env.VITE_BACKEND_URL}/books`,  // e.g. http://localhost:5001/api/books
+  baseURL: `${import.meta.env.VITE_BACKEND_URL}/books`,  // e.g. https://edutrade-webportal.onrender.com/api/books
   withCredentials: true,
 });
 
