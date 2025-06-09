@@ -1,9 +1,17 @@
 import axios from 'axios';
 
-const API_URL = '/api/auth';
+// Use your backend URL from environment variables
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || 'https://edutrade-webportal.onrender.com/api';
+const API_URL = `${API_BASE_URL}/auth`;
 
-// Set up axios interceptor for token
-axios.interceptors.request.use(
+// Axios instance for all auth requests
+const axiosInstance = axios.create({
+  baseURL: API_URL,
+  withCredentials: true, // 🛡️ allows cookies to be sent if needed
+});
+
+// Interceptor to attach token
+axiosInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -11,16 +19,14 @@ axios.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 const authService = {
-  // Register a new user
+  // Register
   register: async (userData) => {
     try {
-      const response = await axios.post(`${API_URL}/register`, userData);
+      const response = await axiosInstance.post('/register', userData);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
       }
@@ -30,10 +36,10 @@ const authService = {
     }
   },
 
-  // Login user
+  // Login
   login: async (credentials) => {
     try {
-      const response = await axios.post(`${API_URL}/login`, credentials);
+      const response = await axiosInstance.post('/login', credentials);
       if (response.data.token) {
         localStorage.setItem('token', response.data.token);
       }
@@ -43,25 +49,25 @@ const authService = {
     }
   },
 
-  // Logout user
+  // Logout
   logout: () => {
     localStorage.removeItem('token');
   },
 
-  // Get current user profile
+  // Get user profile
   getCurrentUser: async () => {
     try {
-      const response = await axios.get(`${API_URL}/profile`);
+      const response = await axiosInstance.get('/profile');
       return response.data;
     } catch (error) {
       throw error.response?.data || error;
     }
   },
 
-  // Update user profile
+  // Update profile
   updateProfile: async (userData) => {
     try {
-      const response = await axios.put(`${API_URL}/profile`, userData);
+      const response = await axiosInstance.put('/profile', userData);
       return response.data;
     } catch (error) {
       throw error.response?.data || error;
@@ -71,14 +77,14 @@ const authService = {
   // Verify token
   verifyToken: async () => {
     try {
-      const response = await axios.get(`${API_URL}/verify`);
+      const response = await axiosInstance.get('/verify');
       return response.data;
     } catch (error) {
       throw error.response?.data || error;
     }
   },
 
-  // Check if user is authenticated
+  // Check auth
   isAuthenticated: () => {
     return !!localStorage.getItem('token');
   }
